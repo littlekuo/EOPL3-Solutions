@@ -1,12 +1,15 @@
 #lang racket
 
+
 (define var-exp (lambda (var) var))
 
 (define lambda-exp
   (lambda (var body)
-    (list 'lambda (list var) body)))
+    (list 'lambda var body)))
 
-(define app-exp (lambda (exp1 exp2) (list exp1 exp2)))
+(define app-exp
+  (lambda (exp1 exp2)
+    (list exp1 exp2)))
 
 (define var-exp? symbol?)
 
@@ -14,23 +17,19 @@
   (lambda (exp)
     (and (pair? exp) (eqv? 'lambda (car exp)))))
 
-
 (define app-exp?
   (lambda (exp)
     (and (pair? exp) (pair? (cdr exp) (null? (cddr exp))))))
 
+(define var-exp->var (lambda (exp) exp))
 
-(define var-exp->var (lambda (x) x))
-
-(define lambda-exp->bound-var caadr)
+(define lambda-exp->bound-var cadr)
 
 (define lambda-exp->body caddr)
 
 (define app-exp->rator car)
 
 (define app-exp->rand cadr)
-
-
 
 ;test
  (define occurs-free?

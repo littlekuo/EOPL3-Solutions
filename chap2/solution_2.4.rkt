@@ -7,8 +7,7 @@
 
 (define empty-stack?
   (lambda (s)
-    (if (equal? s '())
-	#t
+    (if (equal? s '()) #t
 	#f)))
 
 (define push
